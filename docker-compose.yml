@@ -24,8 +24,7 @@ services:
   api:
     restart: always
     build:
-      context: ./
-      dockerfile: api/Dockerfile
+      context: api
   db:
     image: postgres
     restart: always

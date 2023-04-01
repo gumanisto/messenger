@@ -1,4 +1,4 @@
-module github.com/gumanisto/messenger
+module github.com/gumanisto/messenger-backend
 
 go 1.18
 

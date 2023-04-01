@@ -8,16 +8,14 @@ ENV GOPATH /go
 ENV GOCACHE /go-build
 ENV GO111MODULE on
 
-COPY ./api/go.mod ./
-COPY ./api/go.sum ./
+COPY go.mod ./
+COPY go.sum ./
 
 RUN go mod download
 
 COPY . ./
-RUN ls
 
 # RUN go build -o bin/api main.go
-# RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o api ./api
-RUN env GOOS=linux go build main.go
+RUN go build -o bin/api main.go
 
-CMD ["/code/bin/api"]
+CMD ["/app/bin/api"]
