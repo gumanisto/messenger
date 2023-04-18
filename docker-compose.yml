@@ -12,6 +12,8 @@ services:
       - 80:80
     depends_on:
       - backend
+      - api
+      - api2
   backend:
     build:
       context: backend
@@ -21,10 +23,20 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    ports:
+      - 3000:3000
   api:
     restart: always
     build:
       context: api
+    ports:
+      - 4000:4000
+  api2:
+    restart: always
+    build:
+      context: api
+    ports:
+      - 4001:4001
   db:
     image: postgres
     restart: always

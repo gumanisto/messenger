@@ -14,6 +14,8 @@ func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/message", MessagesHandler)
+	r.HandleFunc("/", IndexHandler)
+
 	http.Handle("/", r)
 
 	log.Fatal(http.ListenAndServe(":8000", handlers.LoggingHandler(os.Stdout, r)))
@@ -37,4 +39,10 @@ func MessagesHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "channel_id: %v\n", vars["channel_id"])
 	fmt.Fprintf(w, "text: %v\n", vars["text"])
 
+}
+
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "text: %v\n", vars["text"])
 }
